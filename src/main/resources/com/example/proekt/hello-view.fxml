@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proekt.HelloController">
+   <children>
+      <TableView fx:id="mainTable" layoutX="102.0" layoutY="100.0" prefHeight="200.0" prefWidth="397.0">
+        <columns>
+          <TableColumn fx:id="logoClm" prefWidth="75.0" text="Логотип" />
+          <TableColumn fx:id="nameClm" prefWidth="109.0" text="Название мероприятия" />
+            <TableColumn fx:id="dirClm" minWidth="0.0" prefWidth="130.0" text="Направление мероприятия" />
+            <TableColumn fx:id="dateClm" minWidth="0.0" prefWidth="82.0" text="Дата" />
+        </columns>
+      </TableView>
+      <Button fx:id="authBtn" layoutX="256.0" layoutY="333.0" mnemonicParsing="false" text="Авторизация" />
+   </children>
+</AnchorPane>
