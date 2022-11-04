@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proekt.Authorization">
    <children>
-      <Button layoutX="36.0" layoutY="188.0" mnemonicParsing="false" text="Войти" />
+      <Button fx:id="enterBtn" layoutX="36.0" layoutY="188.0" mnemonicParsing="false" text="Войти" />
       <PasswordField fx:id="password" layoutX="111.0" layoutY="119.0" promptText="Пароль" />
       <TextField fx:id="login" layoutX="111.0" layoutY="76.0" promptText="Логин" />
       <Label layoutX="38.0" layoutY="79.0" prefHeight="19.0" prefWidth="45.0" text="Логин">
@@ -18,5 +18,7 @@
             <Font size="13.0" />
          </font>
       </Label>
+      <TextField fx:id="captcha" alignment="CENTER" layoutX="360.0" layoutY="76.0" promptText="Captcha" />
+      <TextField fx:id="captchaText" alignment="CENTER" editable="false" layoutX="360.0" layoutY="119.0" />
    </children>
 </AnchorPane>
