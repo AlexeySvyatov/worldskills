@@ -17,6 +17,38 @@ public class Authorization {
 
     @FXML
     void initialize(){
+        captchaSet();
+        enterBtn.setOnAction(actionEvent -> {
+            String loginCheck = login.getText().trim();
+            String passwordCheck = password.getText().trim();
+            String captchaCheck = captcha.getText().trim();
+            ResultSet res = bdread(loginCheck, passwordCheck);
+            int trials = 0;
+            int count = 0;
+            try{
+                while(res.next()){
+                    count++;
+                }
+            }catch(SQLException ex){
+                ex.printStackTrace();
+                trials++;
+                System.out.println(trials);
+            }
+            if(count >= 1 & captchaCheck.equals(captchaText.getText())){
+                System.out.println("Авторизация прошла успешно");
+            }else{
+                captchaSet();
+                System.out.println("Произошла ошибка");
+            }if(trials > 3){
+                login.setEditable(false);
+                password.setEditable(false);
+                captcha.setEditable(false);
+                captchaSet();
+            }
+        });
+    }
+
+    public void captchaSet(){
         String code = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
         Random random = new Random();
         int index;
@@ -28,25 +60,6 @@ public class Authorization {
             captxt += cap;
         }
         captchaText.setText(captxt);
-        enterBtn.setOnAction(actionEvent -> {
-            String loginCheck = login.getText().trim();
-            String passwordCheck = password.getText().trim();
-            String captchaCheck = captcha.getText().trim();
-            ResultSet res = bdread(loginCheck, passwordCheck);
-            int count = 0;
-            try{
-                while(res.next()){
-                    count++;
-                }
-            }catch(SQLException ex){
-                ex.printStackTrace();
-            }
-            if(count >= 1 & captchaCheck.equals(captchaText.getText())){
-                System.out.println("Авторизация прошла успешно");
-            }else{
-                System.out.println("Произошла ошибка");
-            }
-        });
     }
 
     public ResultSet bdread(String loginCheck, String passwordCheck){
