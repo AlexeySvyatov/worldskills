@@ -27,11 +27,7 @@ public class HelloController {
         dateClm.setCellValueFactory(new PropertyValueFactory<MainTable, String>("date"));
         mainTable.setItems(events);
         authBtn.setOnAction(event ->{
-            try{
-                HelloApplication.openAnotherWindow("authorization.fxml");
-            }catch (IOException ex){
-                ex.printStackTrace();
-            }
+            HelloApplication.openAnotherWindow("authorization.fxml");
             authBtn.getScene().getWindow().hide();
         });
     }

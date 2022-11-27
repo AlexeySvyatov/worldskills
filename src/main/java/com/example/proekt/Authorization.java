@@ -22,28 +22,72 @@ public class Authorization {
             String loginCheck = login.getText().trim();
             String passwordCheck = password.getText().trim();
             String captchaCheck = captcha.getText().trim();
-            ResultSet res = bdread(loginCheck, passwordCheck);
-            int trials = 0;
+            String query = "SELECT * FROM worldskills.organizators WHERE Почта =? AND Пароль =?";
+            System.out.println(query);
+            ResultSet res = bdread(loginCheck, passwordCheck, query);
             int count = 0;
             try{
                 while(res.next()){
                     count++;
-                }
+                }System.out.println(count);
             }catch(SQLException ex){
                 ex.printStackTrace();
-                trials++;
-                System.out.println(trials);
+            }
+            if(count >= 1 & captchaCheck.equals(captchaText.getText())){
+                System.out.println("Авторизация прошла успешно");
+                HelloApplication.openAnotherWindow("orgWindow.fxml");
+                enterBtn.getScene().getWindow().hide();
+            }else{
+                captchaSet();
+                System.out.println("Произошла ошибка");
+            }
+            query = "SELECT * FROM worldskills.members WHERE Почта =? AND Пароль =?";
+            System.out.println(query);
+            ResultSet res2 = bdread(loginCheck, passwordCheck, query);
+            try{
+                while(res2.next()){
+                    count++;
+                }System.out.println(count);
+            }catch(SQLException ex){
+                ex.printStackTrace();
             }
             if(count >= 1 & captchaCheck.equals(captchaText.getText())){
                 System.out.println("Авторизация прошла успешно");
             }else{
                 captchaSet();
                 System.out.println("Произошла ошибка");
-            }if(trials > 3){
-                login.setEditable(false);
-                password.setEditable(false);
-                captcha.setEditable(false);
+            }
+            query = "SELECT * FROM worldskills.moderators WHERE Почта =? AND Пароль =?";
+            System.out.println(query);
+            ResultSet res3 = bdread(loginCheck, passwordCheck, query);
+            try{
+                while(res3.next()){
+                    count++;
+                }System.out.println(count);
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }
+            if(count >= 1 & captchaCheck.equals(captchaText.getText())){
+                System.out.println("Авторизация прошла успешно");
+            }else{
                 captchaSet();
+                System.out.println("Произошла ошибка");
+            }
+            query = "SELECT * FROM worldskills.jury WHERE Почта =? AND Пароль =?";
+            System.out.println(query);
+            ResultSet res4 = bdread(loginCheck, passwordCheck, query);
+            try{
+                while(res4.next()){
+                    count++;
+                }System.out.println(count);
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }
+            if(count >= 1 & captchaCheck.equals(captchaText.getText())){
+                System.out.println("Авторизация прошла успешно");
+            }else{
+                captchaSet();
+                System.out.println("Произошла ошибка");
             }
         });
     }
@@ -62,11 +106,10 @@ public class Authorization {
         captchaText.setText(captxt);
     }
 
-    public ResultSet bdread(String loginCheck, String passwordCheck){
+    public ResultSet bdread(String loginCheck, String passwordCheck, String query){
         ResultSet resSet = null;
-        String loginSelect = "SELECT * FROM worldskills.organizators WHERE Почта =? AND Пароль =?";
         try{
-            PreparedStatement preSt = getDbConnection().prepareStatement(loginSelect);
+            PreparedStatement preSt = getDbConnection().prepareStatement(query);
             preSt.setString(1, loginCheck);
             preSt.setString(2, passwordCheck);
             resSet = preSt.executeQuery();
