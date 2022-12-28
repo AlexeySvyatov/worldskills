@@ -14,81 +14,57 @@ public class Authorization {
     @FXML private TextField captcha;
     @FXML private PasswordField password;
     @FXML private TextField captchaText;
+    public static int idOrg = 0;
 
     @FXML
     void initialize(){
         captchaSet();
         enterBtn.setOnAction(actionEvent -> {
             String loginCheck = login.getText().trim();
-            String passwordCheck = password.getText().trim();
+            String passCheck = password.getText().trim();
             String captchaCheck = captcha.getText().trim();
-            String query = "SELECT * FROM worldskills.organizators WHERE Почта =? AND Пароль =?";
-            System.out.println(query);
-            ResultSet res = bdread(loginCheck, passwordCheck, query);
-            int count = 0;
-            try{
-                while(res.next()){
-                    count++;
-                }System.out.println(count);
-            }catch(SQLException ex){
+            try {
+                Statement orgStatement = getDbConnection().createStatement();
+                ResultSet orgSet = orgStatement.executeQuery("SELECT * FROM organizators");
+                while(orgSet.next()){
+                    if(orgSet.getString("Почта").equals(loginCheck) & orgSet.getString("Пароль").equals(passCheck)
+                            & captchaCheck.equals(captchaText.getText())){
+                        idOrg = orgSet.getInt("ID");
+                        HelloApplication.openAnotherWindow("orgWindow.fxml");
+                        enterBtn.getScene().getWindow().hide();
+                    }
+                }
+                Statement modStatement = getDbConnection().createStatement();
+                ResultSet modSet = modStatement.executeQuery("SELECT * FROM moderators");
+                while(modSet.next()){
+                    if(modSet.getString("Почта").equals(loginCheck) & modSet.getString("Пароль").equals(passCheck)
+                            & captchaCheck.equals(captchaText.getText())){
+                        HelloApplication.openAnotherWindow("modWindow.fxml");
+                        enterBtn.getScene().getWindow().hide();
+                    }
+                }
+                Statement juryStatement = getDbConnection().createStatement();
+                ResultSet jurySet = juryStatement.executeQuery("SELECT * FROM jury");
+                while(jurySet.next()){
+                    if(jurySet.getString("Почта").equals(loginCheck) & jurySet.getString("Пароль").equals(passCheck)
+                            & captchaCheck.equals(captchaText.getText())){
+                        HelloApplication.openAnotherWindow("juryWindow.fxml");
+                        enterBtn.getScene().getWindow().hide();
+                    }
+                }
+                Statement memStatement = getDbConnection().createStatement();
+                ResultSet memSet = memStatement.executeQuery("SELECT * FROM members");
+                while(memSet.next()){
+                    if(memSet.getString("Почта").equals(loginCheck) & memSet.getString("Пароль").equals(passCheck)
+                            & captchaCheck.equals(captchaText.getText())){
+                        HelloApplication.openAnotherWindow("memWindow.fxml");
+                        enterBtn.getScene().getWindow().hide();
+                    }
+                }
+            } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
-            if(count >= 1 & captchaCheck.equals(captchaText.getText())){
-                System.out.println("Авторизация прошла успешно");
-                HelloApplication.openAnotherWindow("orgWindow.fxml");
-                enterBtn.getScene().getWindow().hide();
-            }else{
-                captchaSet();
-                System.out.println("Произошла ошибка");
-            }
-            query = "SELECT * FROM worldskills.members WHERE Почта =? AND Пароль =?";
-            System.out.println(query);
-            ResultSet res2 = bdread(loginCheck, passwordCheck, query);
-            try{
-                while(res2.next()){
-                    count++;
-                }System.out.println(count);
-            }catch(SQLException ex){
-                ex.printStackTrace();
-            }
-            if(count >= 1 & captchaCheck.equals(captchaText.getText())){
-                System.out.println("Авторизация прошла успешно");
-            }else{
-                captchaSet();
-                System.out.println("Произошла ошибка");
-            }
-            query = "SELECT * FROM worldskills.moderators WHERE Почта =? AND Пароль =?";
-            System.out.println(query);
-            ResultSet res3 = bdread(loginCheck, passwordCheck, query);
-            try{
-                while(res3.next()){
-                    count++;
-                }System.out.println(count);
-            }catch(SQLException ex){
-                ex.printStackTrace();
-            }
-            if(count >= 1 & captchaCheck.equals(captchaText.getText())){
-                System.out.println("Авторизация прошла успешно");
-            }else{
-                captchaSet();
-                System.out.println("Произошла ошибка");
-            }
-            query = "SELECT * FROM worldskills.jury WHERE Почта =? AND Пароль =?";
-            System.out.println(query);
-            ResultSet res4 = bdread(loginCheck, passwordCheck, query);
-            try{
-                while(res4.next()){
-                    count++;
-                }System.out.println(count);
-            }catch(SQLException ex){
-                ex.printStackTrace();
-            }
-            if(count >= 1 & captchaCheck.equals(captchaText.getText())){
-                System.out.println("Авторизация прошла успешно");
-            }else{
-                captchaSet();
-                System.out.println("Произошла ошибка");
-            }
+            captchaSet();
         });
     }
 
@@ -104,19 +80,6 @@ public class Authorization {
             captxt += cap;
         }
         captchaText.setText(captxt);
-    }
-
-    public ResultSet bdread(String loginCheck, String passwordCheck, String query){
-        ResultSet resSet = null;
-        try{
-            PreparedStatement preSt = getDbConnection().prepareStatement(query);
-            preSt.setString(1, loginCheck);
-            preSt.setString(2, passwordCheck);
-            resSet = preSt.executeQuery();
-        }catch(SQLException | ClassNotFoundException ex){
-            ex.printStackTrace();
-        }
-        return resSet;
     }
 
     Connection dbConnection;

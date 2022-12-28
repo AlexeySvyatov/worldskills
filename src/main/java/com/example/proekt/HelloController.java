@@ -8,7 +8,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
 import java.sql.*;
 
 public class HelloController {
@@ -17,14 +16,17 @@ public class HelloController {
     @FXML private Button authBtn;
     @FXML private TableView<MainTable> mainTable;
     @FXML private TableColumn<MainTable, String> nameClm;
-    @FXML private TableColumn<MainTable, String> dirClm;
     @FXML private TableColumn<MainTable, String> dateClm;
+    @FXML private TableColumn<MainTable, Integer> daysClm;
+    @FXML private TableColumn<MainTable, Integer> cityClm;
 
     @FXML
     void initialize(){
         initEvent();
         nameClm.setCellValueFactory(new PropertyValueFactory<MainTable, String>("name"));
         dateClm.setCellValueFactory(new PropertyValueFactory<MainTable, String>("date"));
+        daysClm.setCellValueFactory(new PropertyValueFactory<MainTable, Integer>("days"));
+        cityClm.setCellValueFactory(new PropertyValueFactory<MainTable, Integer>("city"));
         mainTable.setItems(events);
         authBtn.setOnAction(event ->{
             HelloApplication.openAnotherWindow("authorization.fxml");
@@ -35,9 +37,9 @@ public class HelloController {
     private void initEvent() {
         try{
             dbConnection = getDbConnection();
-            ResultSet resSet = dbConnection.createStatement().executeQuery("SELECT Событие, Дата FROM worldskills.events");
+            ResultSet resSet = dbConnection.createStatement().executeQuery("SELECT Событие, Дата, Дни, Город FROM worldskills.events");
             while(resSet.next()){
-                events.add(new MainTable(resSet.getString("Событие"), resSet.getString("Дата")));
+                events.add(new MainTable(resSet.getString("Событие"), resSet.getString("Дата"), resSet.getInt("Дни"), resSet.getInt("Город")));
             }
         }catch(SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();

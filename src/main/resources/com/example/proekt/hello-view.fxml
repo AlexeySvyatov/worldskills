@@ -7,10 +7,10 @@
    <children>
       <TableView fx:id="mainTable" layoutX="102.0" layoutY="100.0" prefHeight="200.0" prefWidth="397.0">
         <columns>
-          <TableColumn fx:id="logoClm" prefWidth="75.0" text="Логотип" />
-          <TableColumn fx:id="nameClm" prefWidth="109.0" text="Название мероприятия" />
-            <TableColumn fx:id="dirClm" minWidth="0.0" prefWidth="130.0" text="Направление мероприятия" />
-            <TableColumn fx:id="dateClm" minWidth="0.0" prefWidth="82.0" text="Дата" />
+          <TableColumn fx:id="nameClm" prefWidth="125.0" text="Название" />
+          <TableColumn fx:id="dateClm" prefWidth="147.0" text="Дата мероприятия" />
+            <TableColumn fx:id="daysClm" minWidth="0.0" prefWidth="61.0" text="Дни" />
+            <TableColumn fx:id="cityClm" minWidth="0.0" prefWidth="63.0" text="Город" />
         </columns>
       </TableView>
       <Button fx:id="authBtn" layoutX="256.0" layoutY="333.0" mnemonicParsing="false" text="Авторизация" />
