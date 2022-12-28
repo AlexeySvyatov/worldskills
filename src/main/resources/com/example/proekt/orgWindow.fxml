@@ -7,22 +7,22 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proekt.Organizator">
     <children>
-        <Button fx:id="btnMyProf" layoutX="62.0" layoutY="286.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="79.0" style="-fx-border-color: purple; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Мой профиль" textAlignment="CENTER" wrapText="true" />
+        <Button fx:id="profileBtn" layoutX="62.0" layoutY="286.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="79.0" text="Мой профиль" textAlignment="CENTER" wrapText="true" />
         <ImageView fitHeight="193.0" fitWidth="162.0" layoutX="21.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" />
-        <Label fx:id="lbPrivetTime" layoutX="264.0" layoutY="48.0" text="Иди спи, другалек">
+        <Label fx:id="helloTime" layoutX="264.0" layoutY="48.0">
             <font>
                 <Font name="System Bold Italic" size="15.0" />
             </font>
         </Label>
-        <Label fx:id="lbPrivetName" alignment="CENTER" layoutX="171.0" layoutY="79.0" prefHeight="22.0" prefWidth="268.0" text="Василек">
+        <Label fx:id="helloName" alignment="CENTER" layoutX="171.0" layoutY="79.0" prefHeight="22.0" prefWidth="268.0">
             <font>
                 <Font name="System Bold Italic" size="15.0" />
             </font>
         </Label>
-        <Button fx:id="btnMerop" layoutX="264.0" layoutY="154.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="106.0" style="-fx-border-color: purple; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Мероприятия" />
-        <Button fx:id="btnUchast" layoutX="264.0" layoutY="223.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="106.0" style="-fx-border-color: purple; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Участники" />
-        <Button fx:id="btnJury" layoutX="264.0" layoutY="294.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="106.0" style="-fx-border-color: purple; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;" text="Жюри" />
-        <Pane fx:id="paneMyProf" layoutX="15.0" layoutY="11.0" prefHeight="379.0" prefWidth="578.0" style="-fx-background-color: white; -fx-border-color: purple; -fx-border-width: 2; -fx-border-radius: 15;" visible="false">
+        <Button fx:id="eventsBtn" layoutX="264.0" layoutY="154.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="106.0" text="Мероприятия" />
+        <Button fx:id="membersBtn" layoutX="264.0" layoutY="223.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="106.0" text="Участники" />
+        <Button fx:id="juryBtn" layoutX="264.0" layoutY="294.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="106.0" text="Жюри" />
+        <Pane fx:id="paneProfile" layoutX="15.0" layoutY="11.0" prefHeight="379.0" prefWidth="578.0" style="-fx-background-color: white; -fx-border-color: purple; -fx-border-width: 2; -fx-border-radius: 15;" visible="false">
             <children>
                 <Label layoutX="217.0" layoutY="14.0" text="Мой профиль">
                     <font>
@@ -64,34 +64,34 @@
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
-                <Button fx:id="btnOkProf" layoutX="361.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="Ок" />
-                <Button fx:id="btnOtmProf" layoutX="465.0" layoutY="332.0" mnemonicParsing="false" text="Отмена" />
+                <Button fx:id="okBtn" layoutX="361.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="Ок" />
+                <Button fx:id="cancelBtn" layoutX="465.0" layoutY="332.0" mnemonicParsing="false" text="Отмена" />
                 <ImageView fx:id="imageID" fitHeight="151.0" fitWidth="146.0" layoutX="361.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
-                <PasswordField fx:id="tfPass" layoutX="360.0" layoutY="239.0" promptText="Пароль" />
-                <PasswordField fx:id="tfPass1" layoutX="360.0" layoutY="282.0" promptText="Повтор пароля" />
+                <PasswordField fx:id="password" layoutX="360.0" layoutY="239.0" promptText="Пароль" />
+                <PasswordField fx:id="password1" layoutX="360.0" layoutY="282.0" promptText="Повтор пароля" />
                 <Label fx:id="lbFIO" layoutX="77.0" layoutY="70.0" />
                 <Label fx:id="lbPol" layoutX="77.0" layoutY="110.0" text="Label" />
-                <Label fx:id="lbBdate" layoutX="91.0" layoutY="161.0" text="Label" />
+                <Label fx:id="lbBDate" layoutX="91.0" layoutY="161.0" text="Label" />
                 <Label fx:id="lbID" layoutX="91.0" layoutY="206.0" text="Label" />
                 <Label fx:id="lbCountry" layoutX="91.0" layoutY="243.0" text="Label" />
                 <Label fx:id="lbNumber" layoutX="91.0" layoutY="273.0" text="Label" />
                 <Label fx:id="lbEmail" layoutX="77.0" layoutY="311.0" text="Label" />
-                <CheckBox fx:id="checkPas" layoutX="371.0" layoutY="215.0" mnemonicParsing="false" text="Сменить пароль" />
-                <Label fx:id="lbErrorPas" layoutX="390.0" layoutY="311.0" />
+                <CheckBox fx:id="checkPw" layoutX="371.0" layoutY="215.0" mnemonicParsing="false" text="Сменить пароль" />
+                <Label fx:id="pwError" layoutX="390.0" layoutY="311.0" />
             </children>
         </Pane>
-        <Pane fx:id="paneMerop" layoutX="14.0" layoutY="13.0" prefHeight="379.0" prefWidth="578.0" style="-fx-background-color: white; -fx-border-color: purple; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15;">
+        <Pane fx:id="paneEvents" layoutX="14.0" layoutY="13.0" prefHeight="379.0" prefWidth="578.0" style="-fx-background-color: white; -fx-border-color: purple; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15;">
             <children>
                 <Label layoutX="190.0" layoutY="14.0" text="Добавить мероприятие" >
                     <font>
                         <Font name="System Bold" size="17.0" />
                     </font>
                 </Label>
-                <TextField fx:id="tfNameM" layoutX="40.0" layoutY="59.0" promptText="Наименование мероприятия" />
-                <TextField fx:id="tfNameAct" layoutX="40.0" layoutY="109.0" promptText="Активность" />
-                <TextField fx:id="tfDays" layoutX="40.0" layoutY="238.0" prefHeight="25.0" prefWidth="45.0" promptText="Дни" />
-                <TextField fx:id="tfDay" layoutX="99.0" layoutY="238.0" prefHeight="25.0" prefWidth="45.0" promptText="День" />
-                <DatePicker fx:id="comboDate" layoutX="27.0" layoutY="154.0" promptText="Дата начала" />
+                <TextField fx:id="eventName" layoutX="40.0" layoutY="59.0" promptText="Наименование мероприятия" />
+                <TextField fx:id="actName" layoutX="40.0" layoutY="109.0" promptText="Активность" />
+                <TextField fx:id="days" layoutX="40.0" layoutY="238.0" prefHeight="25.0" prefWidth="45.0" promptText="Дни" />
+                <TextField fx:id="day" layoutX="99.0" layoutY="238.0" prefHeight="25.0" prefWidth="45.0" promptText="День" />
+                <DatePicker fx:id="startDate" layoutX="27.0" layoutY="154.0" promptText="Дата начала" />
                 <ComboBox fx:id="comboJ1" layoutX="313.0" layoutY="102.0" prefWidth="150.0" promptText="Жюри 1" />
                 <ComboBox fx:id="comboJ4" layoutX="313.0" layoutY="212.0" prefWidth="150.0" promptText="Жюри 4" />
                 <ComboBox fx:id="comboJ2" layoutX="313.0" layoutY="138.0" prefWidth="150.0" promptText="Жюри 2" />
@@ -99,12 +99,12 @@
                 <ComboBox fx:id="comboJ5" layoutX="313.0" layoutY="250.0" prefWidth="150.0" promptText="Жюри 5" />
                 <ComboBox fx:id="comboMod" layoutX="313.0" layoutY="58.0" prefWidth="150.0" promptText="Модератор" />
                 <ComboBox fx:id="comboWin" layoutX="313.0" layoutY="295.0" prefWidth="150.0" promptText="Победитель" />
-                <Button fx:id="btnOtmM" layoutX="492.0" layoutY="334.0" mnemonicParsing="false" text="Отмена" />
-                <Button fx:id="btnSaveM" layoutX="389.0" layoutY="334.0" mnemonicParsing="false" text="Сохранить" />
-                <TextField fx:id="tfH" layoutX="40.0" layoutY="189.0" prefHeight="25.0" prefWidth="45.0" promptText="Часы" />
-                <TextField fx:id="tfMin" layoutX="99.0" layoutY="189.0" prefHeight="25.0" prefWidth="45.0" promptText="Мин" />
-                <Label fx:id="lbErrorTime" layoutX="18.0" layoutY="216.0" text="Введите от 6:00 до 23:00" />
-                <Label fx:id="lbError" layoutX="18.0" layoutY="287.0" />
+                <Button fx:id="cancelEventBtn" layoutX="492.0" layoutY="334.0" mnemonicParsing="false" text="Отмена" />
+                <Button fx:id="saveEventBtn" layoutX="389.0" layoutY="334.0" mnemonicParsing="false" text="Сохранить" />
+                <TextField fx:id="hours" layoutX="40.0" layoutY="189.0" prefHeight="25.0" prefWidth="45.0" promptText="Часы" />
+                <TextField fx:id="minutes" layoutX="99.0" layoutY="189.0" prefHeight="25.0" prefWidth="45.0" promptText="Мин" />
+                <Label fx:id="timeError" layoutX="18.0" layoutY="216.0" text="Введите от 6:00 до 23:00" />
+                <Label fx:id="fieldError" layoutX="18.0" layoutY="287.0" />
             </children>
         </Pane>
     </children>
