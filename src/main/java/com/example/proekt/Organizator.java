@@ -32,7 +32,7 @@ public class Organizator {
     @FXML private TextField minutes;
     @FXML private TextField eventName;
     @FXML private TextField actName;
-    @FXML private Label fieldError;
+    @FXML private Label errorMes;
     @FXML private Label helloTime;
     @FXML private Label helloName;
     @FXML private Label lbFIO;
@@ -72,13 +72,13 @@ public class Organizator {
         moderCombo();
         juryCombo();
         winCombo();
-        try {
+        try{
             Statement statement = getDbConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT ФИО FROM organizators WHERE `ID` = " + Authorization.idOrg);
-            while (resultSet.next()) {
+            while(resultSet.next()) {
                 helloName.setText(resultSet.getString("ФИО"));
             }
-        } catch (Exception ex) {
+        }catch (Exception ex) {
             ex.printStackTrace();
         }
         okBtn.setOnAction(event -> {
@@ -88,17 +88,18 @@ public class Organizator {
                     PreparedStatement statement = getDbConnection().prepareStatement
                             ("UPDATE organizators SET Пароль = '" + password.getText() + "' WHERE ID = " + Authorization.idOrg);
                     statement.executeUpdate();
-                } catch (Exception ex) {
+                }catch (Exception ex) {
                     ex.printStackTrace();
                 }
                 paneProfile.setVisible(false);
-                pwError.setText("");}
-            else if (!(checkPw.isSelected())) {
+                pwError.setText("");
+            }else if(!(checkPw.isSelected())) {
                 paneProfile.setVisible(false);
-                pwError.setText("");}
-            else {pwError.setText("Проверьте пароль");}
+                pwError.setText("");
+            }else{
+                pwError.setText("Проверьте пароль");
+            }
         });
-
         profileBtn.setOnAction(event -> {
             paneProfile.setVisible(true);
             showMyInfo(Authorization.idOrg);
@@ -107,7 +108,6 @@ public class Organizator {
             paneProfile.setVisible(false);
             pwError.setText("");
         });
-
         eventsBtn.setOnAction(event -> {
             paneEvents.setVisible(true);
         });
@@ -115,47 +115,47 @@ public class Organizator {
             paneEvents.setVisible(false);
         });
         saveEventBtn.setOnAction(event -> {
-            if (!(hours.getText().isEmpty() || minutes.getText().isEmpty()
-                    || actName.getText().isEmpty() || eventName.getText().isEmpty()) && (5<Integer.parseInt(hours.getText())
-                    && Integer.parseInt(hours.getText())<24) && (0<=Integer.parseInt(minutes.getText()) && Integer.parseInt(minutes.getText())<=59)
-                    && (0<Integer.parseInt(days.getText()) && 0<Integer.parseInt(day.getText()))) {
-                try{
-                    PreparedStatement statement = getDbConnection().prepareStatement
-                            ("INSERT into activities(Мероприятие, Дата, Дни, Активность, День, Время," +
-                                    "Модератор, Жюри1, Жюри2 ,Жюри3 ,Жюри4 ,Жюри5, Победитель) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
-                    statement.setString(1, eventName.getText());
-                    statement.setString(2, String.valueOf(java.sql.Date.valueOf(startDate.getValue())));
-                    statement.setString(3, days.getText());
-                    statement.setString(4, actName.getText());
-                    statement.setString(5, day.getText());
-                    statement.setString(6, (hours.getText() +":"+ minutes.getText()));
-                    statement.setString(7, selectModer);
-                    statement.setString(8, selectJury1);
-                    statement.setString(9, selectJury2);
-                    statement.setString(10, selectJury3);
-                    statement.setString(11, selectJury4);
-                    statement.setString(12, selectJury5);
-                    statement.setString(13, selectWinner);
-                    statement.executeUpdate();
-                    paneEvents.setVisible(false);
+            if(!(hours.getText().isEmpty() || minutes.getText().isEmpty() || actName.getText().isEmpty() || eventName.getText().isEmpty())
+                    && (0<Integer.parseInt(days.getText()) && 0<Integer.parseInt(day.getText()))){
+                if((5<Integer.parseInt(hours.getText()) && Integer.parseInt(hours.getText())<24) &&
+                        (0<=Integer.parseInt(minutes.getText()) && Integer.parseInt(minutes.getText())<=59)){
+                    try{
+                        PreparedStatement statement = getDbConnection().prepareStatement("INSERT into act(Мероприятие, Дата, Дни, Активность, День, Время," +
+                                        "Модератор, Жюри1, Жюри2 ,Жюри3 ,Жюри4 ,Жюри5, Победитель) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                        statement.setString(1, eventName.getText());
+                        statement.setString(2, String.valueOf(java.sql.Date.valueOf(startDate.getValue())));
+                        statement.setString(3, days.getText());
+                        statement.setString(4, actName.getText());
+                        statement.setString(5, day.getText());
+                        statement.setString(6, (hours.getText() +":"+ minutes.getText()));
+                        statement.setString(7, selectModer);
+                        statement.setString(8, selectJury1);
+                        statement.setString(9, selectJury2);
+                        statement.setString(10, selectJury3);
+                        statement.setString(11, selectJury4);
+                        statement.setString(12, selectJury5);
+                        statement.setString(13, selectWinner);
+                        statement.executeUpdate();
+                        paneEvents.setVisible(false);
+                    }catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }else{
+                    errorMes.setText("Проверьте время мероприятия");
                 }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                }}
-            else {fieldError.setText("Проверьте, все ли поля заполнены верно");}
+            }else{
+                errorMes.setText("Проверьте, все ли поля заполнены верно");
+            }
         });
-
     }
 
     private void showTime(){
         int time = Integer.parseInt(String.valueOf(java.time.LocalDateTime.now()).substring(11, 13));
         if (9<=time && time<=10) {
             helloTime.setText("Доброе утро");
-        }
-        else if (11<=time && time<=17) {
+        }else if (11<=time && time<=17) {
             helloTime.setText("Добрый день");
-        }
-        else if (18<=time && time<=23) {
+        }else if (18<=time && time<=23) {
             helloTime.setText("Добрый вечер");
         }
     }
@@ -173,12 +173,11 @@ public class Organizator {
                 lbNumber.setText(resultSet.getString("Телефон"));
                 lbEmail.setText(resultSet.getString("Почта"));
                 picID = resultSet.getString("Фото");
-                imageID.setImage(new Image("C:\\Users\\Sanches\\IdeaProjects\\DemoEkz\\src\\main\\resources\\image\\organizator\\" + picID));
+                imageID.setImage(new Image("B:\\IntelliJ IDEA\\IdeaProjects\\proekt\\src\\main\\resources\\com\\example\\proekt\\pictures\\" + picID));
             }
-        } catch (Exception ex) {
+        }catch (Exception ex){
             ex.printStackTrace();
         }
-
     }
 
     public void moderCombo(){

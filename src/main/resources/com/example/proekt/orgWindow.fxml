@@ -22,19 +22,19 @@
         <Button fx:id="eventsBtn" layoutX="264.0" layoutY="154.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="106.0" text="Мероприятия" />
         <Button fx:id="membersBtn" layoutX="264.0" layoutY="223.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="106.0" text="Участники" />
         <Button fx:id="juryBtn" layoutX="264.0" layoutY="294.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="106.0" text="Жюри" />
-        <Pane fx:id="paneProfile" layoutX="15.0" layoutY="11.0" prefHeight="379.0" prefWidth="578.0" style="-fx-background-color: white; -fx-border-color: purple; -fx-border-width: 2; -fx-border-radius: 15;" visible="false">
+        <Pane fx:id="paneProfile" layoutX="14.0" layoutY="11.0" prefHeight="379.0" prefWidth="578.0" style="-fx-background-color: white; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15;" visible="false">
             <children>
                 <Label layoutX="217.0" layoutY="14.0" text="Мой профиль">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Label layoutX="34.0" layoutY="70.0" text="ФИО:">
+                <Label layoutX="35.0" layoutY="70.0" text="ФИО:">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
-                <Label layoutX="36.0" layoutY="110.0" text="Пол:">
+                <Label layoutX="35.0" layoutY="110.0" text="Пол:">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -80,9 +80,9 @@
                 <Label fx:id="pwError" layoutX="390.0" layoutY="311.0" />
             </children>
         </Pane>
-        <Pane fx:id="paneEvents" layoutX="14.0" layoutY="13.0" prefHeight="379.0" prefWidth="578.0" style="-fx-background-color: white; -fx-border-color: purple; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15;">
+        <Pane fx:id="paneEvents" layoutX="14.0" layoutY="11.0" prefHeight="379.0" prefWidth="578.0" style="-fx-background-color: white; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15;" visible="false">
             <children>
-                <Label layoutX="190.0" layoutY="14.0" text="Добавить мероприятие" >
+                <Label layoutX="190.0" layoutY="14.0" text="Добавить мероприятие">
                     <font>
                         <Font name="System Bold" size="17.0" />
                     </font>
@@ -103,8 +103,8 @@
                 <Button fx:id="saveEventBtn" layoutX="389.0" layoutY="334.0" mnemonicParsing="false" text="Сохранить" />
                 <TextField fx:id="hours" layoutX="40.0" layoutY="189.0" prefHeight="25.0" prefWidth="45.0" promptText="Часы" />
                 <TextField fx:id="minutes" layoutX="99.0" layoutY="189.0" prefHeight="25.0" prefWidth="45.0" promptText="Мин" />
-                <Label fx:id="timeError" layoutX="18.0" layoutY="216.0" text="Введите от 6:00 до 23:00" />
-                <Label fx:id="fieldError" layoutX="18.0" layoutY="287.0" />
+                <Label layoutX="22.0" layoutY="216.0" text="Введите от 6:00 до 23:00" />
+                <Label fx:id="errorMes" layoutX="18.0" layoutY="287.0" />
             </children>
         </Pane>
     </children>
